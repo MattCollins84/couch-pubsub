@@ -1,0 +1,32 @@
+{
+  "name": "couch-pubsub",
+  "version": "1.0.0",
+  "description": "PubSub via CouchDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattCollins84/couch-pubsub.git"
+  },
+  "keywords": [
+    "couchdb",
+    "pubsub",
+    "feed",
+    "realtime",
+    "publish",
+    "subscripe",
+    "message",
+    "bus"
+  ],
+  "author": "MattCollins84",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MattCollins84/couch-pubsub/issues"
+  },
+  "homepage": "https://github.com/MattCollins84/couch-pubsub#readme",
+  "dependencies": {
+    "nano": "6.1.3"
+  }
+}
