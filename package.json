@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/MattCollins84/couch-pubsub#readme",
   "dependencies": {
-    "nano": "6.1.3"
+    "nano": "6.1.3",
+    "async": "1.3.0"
   }
 }
