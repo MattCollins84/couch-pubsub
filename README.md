@@ -82,8 +82,9 @@ export COUCH_PUBSUB_PASSWORD="password"
 ```
 
 # TODO
-There is some stuff I want to add, such as:
+I put this together pretty quickly and there are some things I want to add still, such as:
 
 * Retrieving all things published to a channel since <date>
 * Better error checking
+* Some test coverage
 * Probably more...
