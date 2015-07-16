@@ -29,5 +29,8 @@
   "dependencies": {
     "nano": "6.1.3",
     "async": "1.3.0"
+  },
+  "bin": {
+    "couch-pubsub": "bin/pubsub.js"
   }
 }

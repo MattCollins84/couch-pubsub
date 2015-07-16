@@ -3,7 +3,7 @@
 *****/
 
 var publish = require('./lib/pub.js');
-var Subscribe = require('./lib/sub.js');
+var subscribe = require('./lib/sub.js');
 
 module.exports = function(opts) {
 
@@ -16,10 +16,8 @@ module.exports = function(opts) {
   }.bind(this);
 
   // Subscribe
-  this.subscribe = function(channel) {
-    
-    return new Subscribe(this.opts, channel).feed;
-
+  this.subscribe = function(channel, callback) {
+    subscribe(this.opts, channel, callback);
   }.bind(this);
 
 }
