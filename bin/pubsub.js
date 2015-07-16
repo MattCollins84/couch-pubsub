@@ -50,8 +50,8 @@ if (!process.env.COUCH_PUBSUB_PASSWORD) {
 
 var opts = {
   couch_host: process.env.COUCH_PUBSUB_HOST,
-  couch_username: process.env.COUCH_PUBSUB_USERNAME,
-  couch_password: process.env.COUCH_PUBSUB_PASSWORD,
+  couch_username: (process.env.COUCH_PUBSUB_USERNAME ? process.env.COUCH_PUBSUB_USERNAME : null ),
+  couch_password: (process.env.COUCH_PUBSUB_PASSWORD ? process.env.COUCH_PUBSUB_PASSWORD : null ),
   couch_port: (process.env.COUCH_PUBSUB_PORT ? process.env.COUCH_PUBSUB_PORT : null)
 };
 

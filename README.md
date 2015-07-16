@@ -70,6 +70,8 @@ couch-pubsub publish test-channel "string that you want to publish"
 # subscribe
 couch-pubsub subscribe test-channel
 -> "string that you want to publish"
+-> "the next string that was published"
+-> "the last string to be published"
 ```
 
 You will need to supply your CouchDB credentials via environemnt variables:
