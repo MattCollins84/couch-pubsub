@@ -16,9 +16,10 @@
     "feed",
     "realtime",
     "publish",
-    "subscripe",
-    "message",
-    "bus"
+    "subscribe",
+    "message bus",
+    "distributed message handler",
+    "notifications"
   ],
   "author": "MattCollins84",
   "license": "ISC",
