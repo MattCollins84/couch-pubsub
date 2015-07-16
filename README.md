@@ -80,3 +80,10 @@ export COUCH_PUBSUB_HOSTNAME="http://my-couch-db.com"
 export COUCH_PUBSUB_USERNAME="username"
 export COUCH_PUBSUB_PASSWORD="password"
 ```
+
+# TODO
+There is some stuff I want to add, such as:
+
+* Retrieving all things published to a channel since <date>
+* Better error checking
+* Probably more...
