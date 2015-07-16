@@ -1,6 +1,6 @@
 {
   "name": "couch-pubsub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PubSub via CouchDB",
   "main": "index.js",
   "scripts": {
