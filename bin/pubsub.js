@@ -32,17 +32,33 @@ if (action == "publish" && (!argv[4] || argv[4] == "")) {
   process.exit(1);
 }
 
+// load opts from ENV
+if (!process.env.COUCH_PUBSUB_HOST) {
+  console.log("COUCH_PUBSUB_HOST environemtn variable required!");
+  process.exit(1);
+}
+
+if (!process.env.COUCH_PUBSUB_USERNAME) {
+  console.log("COUCH_PUBSUB_USERNAME environemtn variable required!");
+  process.exit(1);
+}
+
+if (!process.env.COUCH_PUBSUB_PASSWORD) {
+  console.log("COUCH_PUBSUB_PASSWORD environemtn variable required!");
+  process.exit(1);
+}
+
+var opts = {
+  couch_host: process.env.COUCH_PUBSUB_HOST,
+  couch_username: process.env.COUCH_PUBSUB_USERNAME,
+  couch_password: process.env.COUCH_PUBSUB_PASSWORD,
+  couch_port: (process.env.COUCH_PUBSUB_PORT ? process.env.COUCH_PUBSUB_PORT : null)
+};
+
 // publish
 if (action == "publish") {
 
   var toPublish = argv[4];
-
-  var opts = {
-    couch_host: "https://mattcollins.cloudant.com",
-    couch_username: "mattcollins",
-    couch_password: "monkey",
-    couch_port: null // null for default
-  };
 
   publish(opts, channel, toPublish, function CLIpublish(err, data) {
     
@@ -59,13 +75,6 @@ if (action == "publish") {
 
 // subscribe
 if (action == "subscribe") {
-  
-  var opts = {
-    couch_host: "https://mattcollins.cloudant.com",
-    couch_username: "mattcollins",
-    couch_password: "monkey",
-    couch_port: null // null for default
-  };
 
   subscribe(opts, channel, function CLISubscribe(c) {
 
