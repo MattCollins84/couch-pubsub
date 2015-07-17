@@ -34,17 +34,7 @@ if (action == "publish" && (!argv[4] || argv[4] == "")) {
 
 // load opts from ENV
 if (!process.env.COUCH_PUBSUB_HOST) {
-  console.log("COUCH_PUBSUB_HOST environemtn variable required!");
-  process.exit(1);
-}
-
-if (!process.env.COUCH_PUBSUB_USERNAME) {
-  console.log("COUCH_PUBSUB_USERNAME environemtn variable required!");
-  process.exit(1);
-}
-
-if (!process.env.COUCH_PUBSUB_PASSWORD) {
-  console.log("COUCH_PUBSUB_PASSWORD environemtn variable required!");
+  console.log("COUCH_PUBSUB_HOST environment variable required!");
   process.exit(1);
 }
 
@@ -76,14 +66,12 @@ if (action == "publish") {
 // subscribe
 if (action == "subscribe") {
 
-  subscribe(opts, channel, function CLISubscribe(c) {
-
-    c.on('update', function (update) {
+  var subscription = subscribe(opts, channel);
+  
+  subscription.on('update', function (update) {
+  
+    process.stdout.write(update + "\n");
     
-      process.stdout.write(update + "\n");
-      
-    });
-
   });
 
 }

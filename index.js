@@ -16,8 +16,8 @@ module.exports = function(opts) {
   }.bind(this);
 
   // Subscribe
-  this.subscribe = function(channel, callback) {
-    subscribe(this.opts, channel, callback);
+  this.subscribe = function(channel) {
+    return subscribe(this.opts, channel);
   }.bind(this);
 
 }
