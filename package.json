@@ -1,6 +1,6 @@
 {
   "name": "couch-pubsub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "PubSub via CouchDB",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,10 @@
     "subscribe",
     "message bus",
     "distributed message handler",
-    "notifications"
+    "notifications",
+    "scalable pubsub",
+    "scalable",
+    "cloudant"
   ],
   "author": "MattCollins84",
   "license": "ISC",

@@ -7,7 +7,7 @@ var pubsub = new PubSub({
   couch_port: null // null for default
 });
 
-var subscribe = pubsub.subscribe("test-channels");
+var subscribe = pubsub.subscribe("test-channel");
 
 subscribe.on('update', function (update) {
   console.log("UPDATE: "+update);
