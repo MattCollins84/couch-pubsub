@@ -1,0 +1,9 @@
+{
+  "_id": "_design/ts",
+  "views": {
+    "by_ts": {
+      "reduce": "_count",
+      "map": "function (doc) {\n  if (doc && doc.ts) {\n    emit(doc.ts, 1);\n  }\n}"
+    }
+  }
+}
