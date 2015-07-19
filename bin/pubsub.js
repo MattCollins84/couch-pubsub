@@ -2,6 +2,7 @@
  
 var publish = require('../lib/pub.js');
 var subscribe = require('../lib/sub.js');
+var since_lib = require('../lib/since.js');
 
 var argv = process.argv;
 
@@ -32,17 +33,23 @@ if (action == "publish" && (!argv[4] || argv[4] == "")) {
   process.exit(1);
 }
 
-// load opts from ENV
-if (!process.env.COUCH_PUBSUB_HOST) {
-  console.log("COUCH_PUBSUB_HOST environment variable required!");
-  process.exit(1);
+// if action is subscribe, we may have a 'since'
+var since = null;
+if (action == "subscribe" && typeof argv[4] === "string" && (argv[4].match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/) || argv[4].match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$/))) {
+  since = argv[4];
 }
 
+// load opts from ENV
+// if (!process.env.COUCH_PUBSUB_HOST) {
+//   console.log("COUCH_PUBSUB_HOST environment variable required!");
+//   process.exit(1);
+// }
+
 var opts = {
-  couch_host: process.env.COUCH_PUBSUB_HOST,
-  couch_username: (process.env.COUCH_PUBSUB_USERNAME ? process.env.COUCH_PUBSUB_USERNAME : null ),
-  couch_password: (process.env.COUCH_PUBSUB_PASSWORD ? process.env.COUCH_PUBSUB_PASSWORD : null ),
-  couch_port: (process.env.COUCH_PUBSUB_PORT ? process.env.COUCH_PUBSUB_PORT : null)
+  couch_host: "https://mattcollins.cloudant.com",
+  couch_username: "mattcollins",
+  couch_password: "monkey",
+  couch_port: null
 };
 
 // publish
@@ -65,6 +72,26 @@ if (action == "publish") {
 
 // subscribe
 if (action == "subscribe") {
+
+  // do we have a since?
+  if (typeof since === "string") {
+
+    // get everything since this date
+    since_lib(opts, channel, since, function(err, data) {
+
+      if (typeof data === "object") {
+
+        for (var d in data) {
+
+          process.stdout.write(data[d] + "\n");
+
+        }
+
+      }
+
+    })
+
+  }
 
   var subscription = subscribe(opts, channel);
   
