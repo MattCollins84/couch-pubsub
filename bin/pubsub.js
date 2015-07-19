@@ -40,16 +40,16 @@ if (action == "subscribe" && typeof argv[4] === "string" && (argv[4].match(/^[0-
 }
 
 // load opts from ENV
-// if (!process.env.COUCH_PUBSUB_HOST) {
-//   console.log("COUCH_PUBSUB_HOST environment variable required!");
-//   process.exit(1);
-// }
+if (!process.env.COUCH_PUBSUB_HOST) {
+  console.log("COUCH_PUBSUB_HOST environment variable required!");
+  process.exit(1);
+}
 
 var opts = {
-  couch_host: "https://mattcollins.cloudant.com",
-  couch_username: "mattcollins",
-  couch_password: "monkey",
-  couch_port: null
+  couch_host: process.env.COUCH_PUBSUB_HOST,
+  couch_username: (process.env.COUCH_PUBSUB_USERNAME ? process.env.COUCH_PUBSUB_USERNAME : null ),
+  couch_password: (process.env.COUCH_PUBSUB_PASSWORD ? process.env.COUCH_PUBSUB_PASSWORD : null ),
+  couch_port: (process.env.COUCH_PUBSUB_PORT ? process.env.COUCH_PUBSUB_PORT : null)
 };
 
 // publish

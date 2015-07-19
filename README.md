@@ -73,10 +73,29 @@ sub.on('update', function (update) {
 });
 ```
 
+To get all events since a particular date, you can do:
+
+``` js
+var PubSub = require('couch-pubsub');
+
+var pubsub = new PubSub({
+  couch_host: "https://my-couch-db.com",
+  couch_username: "username",
+  couch_password: "password",
+  couch_port: null // null for default
+});
+
+var sub = pubsub.since("test-channel", "2015-01-03 13:26:00", function(err, data) {
+  
+  // err - error retrieving previous events
+  // data - array of previous events
+
+});
+```
+
 ## Command line
 
 To replicate the examples above on the command line you could do:
-
 
 # publish
 
@@ -94,6 +113,19 @@ couch-pubsub subscribe test-channel
 -> "the last string to be published"
 ```
 
+If you want to subscribe but also retrieve all channel events since a particular date, you can add a date to the above comand.
+
+``` js
+couch-pubsub subscribe test-channel "2015-01-03 13:26:00"
+-> "previous event 1"
+-> "previous event 2"
+-> "previous event 3"
+-> "previous event 4"
+-> "string that you want to publish"
+-> "the next string that was published"
+-> "the last string to be published"
+```
+
 You will need to supply your CouchDB credentials via environemnt variables:
 
 ```
@@ -106,7 +138,6 @@ export COUCH_PUBSUB_PASSWORD="password"
 
 I put this together pretty quickly and there are some things I want to add still, such as:
 
-* Retrieving all things published to a channel since <date>
 * Better error checking
 * Some test coverage
 * Probably more...
