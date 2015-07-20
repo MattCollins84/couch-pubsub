@@ -73,27 +73,16 @@ if (action == "publish") {
 // subscribe
 if (action == "subscribe") {
 
-  // do we have a since?
-  if (typeof since === "string") {
-
-    // get everything since this date
-    since_lib(opts, channel, since, function(err, data) {
-
-      if (typeof data === "object") {
-
-        for (var d in data) {
-
-          process.stdout.write(data[d] + "\n");
-
-        }
-
-      }
-
-    })
-
+  var channel_params = {
+    channel: channel
   }
 
-  var subscription = subscribe(opts, channel);
+  // do we have a since?
+  if (typeof since === "string") {
+    channel_params.since = since;
+  }
+
+  var subscription = subscribe(opts, channel_params);
   
   subscription.on('update', function (update) {
   

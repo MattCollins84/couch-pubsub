@@ -4,6 +4,8 @@ A pub/sub tool that leverages the power of CouchDB clustering to provide a simpl
 
 Available on the command line or via the usual Node `require` method.
 
+At the moment there are no automated tests and I am updating fairly regular, please report any issues!
+
 # Installation 
 
 `couch-pubsub` can be used via the command line or within your Node.js app, it is available on NPM:
@@ -27,6 +29,7 @@ You can subscribe or publish to a particular channel.
 
 ## Node
 
+### .publish( channel, str, [callback] )
 To publish to the `test-channel`, you could do something like this:
 
 ``` js
@@ -53,6 +56,8 @@ or if you don't want to handle the callback:
 pubsub.publish("test-channel", "string that you want to publish");
 ```
 
+### .subscribe( opts )
+
 If you wanted to listen for updates to this channel you could do something like this:
 
 ``` js
@@ -65,7 +70,7 @@ var pubsub = new PubSub({
   couch_port: null // null for default
 });
 
-var sub = pubsub.subscribe("test-channel");
+var sub = pubsub.subscribe({ channel: "test-channel", since: "2015-01-03 13:26:00"});
 sub.on('update', function (update) {
     
   // update - the value that was published (e.g. 'string that you want to publish' from above')
@@ -73,7 +78,9 @@ sub.on('update', function (update) {
 });
 ```
 
-To get all events since a particular date, you can do:
+_note: for backwards compatibility purposes `opts` can also be a string 'test-channel'_
+
+To get all updates since a particular date and keep on listening for future updates:
 
 ``` js
 var PubSub = require('couch-pubsub');
@@ -85,7 +92,28 @@ var pubsub = new PubSub({
   couch_port: null // null for default
 });
 
-var sub = pubsub.since("test-channel", "2015-01-03 13:26:00", function(err, data) {
+var sub = pubsub.subscribe({ channel: "test-channel", since: "2015-01-03 13:26:00"});
+sub.on('update', function (update) {
+    
+  // update - the value that was published (e.g. 'string that you want to publish' from above')
+    
+});
+```
+### .since( channel, date)
+
+To get all events since a particular date, as a one of event:
+
+``` js
+var PubSub = require('couch-pubsub');
+
+var pubsub = new PubSub({
+  couch_host: "https://my-couch-db.com",
+  couch_username: "username",
+  couch_password: "password",
+  couch_port: null // null for default
+});
+
+var since = pubsub.since("test-channel", "2015-01-03 13:26:00", function(err, data) {
   
   // err - error retrieving previous events
   // data - array of previous events
