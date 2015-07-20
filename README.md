@@ -70,15 +70,13 @@ var pubsub = new PubSub({
   couch_port: null // null for default
 });
 
-var sub = pubsub.subscribe({ channel: "test-channel", since: "2015-01-03 13:26:00"});
+var sub = pubsub.subscribe("test-channel");
 sub.on('update', function (update) {
     
   // update - the value that was published (e.g. 'string that you want to publish' from above')
     
 });
 ```
-
-_note: for backwards compatibility purposes `opts` can also be a string 'test-channel'_
 
 To get all updates since a particular date and keep on listening for future updates:
 
@@ -99,7 +97,7 @@ sub.on('update', function (update) {
     
 });
 ```
-### .since( channel, date)
+### .since( channel, date, callback )
 
 To get all events since a particular date, as a one of event:
 
