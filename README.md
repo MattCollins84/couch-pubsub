@@ -26,6 +26,10 @@ Then:
 <script src="node_modules/couch-pubsub/dist/couch-pubsub.min.js"></script>
 ```
 
+**Important**: In order to make `couch-pubsub` work with remote databases in the browser you will need to set CORS (Cross Origin Resource Sharing( correctly on your CouchDB server. You can find out how to do this here: https://wiki.apache.org/couchdb/CORS
+
+Cloudant users, look here: https://docs.cloudant.com/cors.html#json-format
+
 ## via CLI
 ```
 npm install -g couch-pubsub
