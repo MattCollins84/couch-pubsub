@@ -2,40 +2,50 @@
 
 A pub/sub tool that leverages the power of CouchDB clustering to provide a simple, reliable and distributed system out of the box.
 
-Available on the command line or via the usual Node `require` method.
-
-At the moment there are no automated tests and I am updating fairly regular, please report any issues!
+Available for Node, the command line and even in the browser.
 
 # Installation 
 
-`couch-pubsub` can be used via the command line or within your Node.js app, it is available on NPM:
+`couch-pubsub` can be used with Node, from the command line or directly in the browser.
 
-
-# via require
-
+## Node
 ```
 npm install couch-pubsub
 ```
+Then:
+``` js
+var CouchPubSub = require('couch-pubsub');
+```
 
-# via CLI
+## Browser
+```
+npm install couch-pubsub
+```
+Then:
+``` html
+<script src="node_modules/couch-pubsub/dist/couch-pubsub.min.js"></script>
+```
 
+## via CLI
 ```
 npm install -g couch-pubsub
 ```
 
 # Usage
 
-You can subscribe or publish to a particular channel.
+There are two main functions.
 
-## Node
+Publish - write some data to a channel
+Subscribe - Get updates from a channel as they happen
+
+There is also a utility function that allows you to fetch all events on a particular channel since a particular date.
+
+## Javascript (Node.js or Browser)
 
 ### .publish( channel, str, [callback] )
 To publish to the `test-channel`, you could do something like this:
-
 ``` js
-var PubSub = require('couch-pubsub');
-
-var pubsub = new PubSub({
+var pubsub = new CouchPubSub({
   couch_host: "https://my-couch-db.com",
   couch_username: "username",
   couch_password: "password",
@@ -61,9 +71,7 @@ pubsub.publish("test-channel", "string that you want to publish");
 If you wanted to listen for updates to this channel you could do something like this:
 
 ``` js
-var PubSub = require('couch-pubsub');
-
-var pubsub = new PubSub({
+var pubsub = new CouchPubSub({
   couch_host: "https://my-couch-db.com",
   couch_username: "username",
   couch_password: "password",
@@ -81,15 +89,6 @@ sub.on('update', function (update) {
 To get all updates since a particular date and keep on listening for future updates:
 
 ``` js
-var PubSub = require('couch-pubsub');
-
-var pubsub = new PubSub({
-  couch_host: "https://my-couch-db.com",
-  couch_username: "username",
-  couch_password: "password",
-  couch_port: null // null for default
-});
-
 var sub = pubsub.subscribe({ channel: "test-channel", since: "2015-01-03 13:26:00"});
 sub.on('update', function (update) {
     
@@ -98,13 +97,10 @@ sub.on('update', function (update) {
 });
 ```
 ### .since( channel, date, callback )
-
-To get all events since a particular date, as a one of event:
+To get all events since a particular date, as a one off event:
 
 ``` js
-var PubSub = require('couch-pubsub');
-
-var pubsub = new PubSub({
+var pubsub = new CouchPubSub({
   couch_host: "https://my-couch-db.com",
   couch_username: "username",
   couch_password: "password",

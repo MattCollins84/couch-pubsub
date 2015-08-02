@@ -1,6 +1,6 @@
-var PubSub = require('couch-pubsub');
+var CouchPubSub = require('couch-pubsub');
 
-var pubsub = new PubSub({
+var pubsub = new CouchPubSub({
   couch_host: "https://your-db.com",
   couch_username: "username",
   couch_password: "password",
