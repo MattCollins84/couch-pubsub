@@ -35,9 +35,8 @@ npm install -g couch-pubsub
 
 There are two main functions.
 
-Publish - write some data to a channel
-
-Subscribe - Get updates from a channel as they happen
+* **Publish** - write some data to a channel
+* **Subscribe** - Get updates from a channel as they happen
 
 
 There is also a utility function that allows you to fetch all events on a particular channel since a particular date.
